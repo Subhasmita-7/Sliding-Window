@@ -1,0 +1,39 @@
+Input :fruits = [1, 2, 1]
+Output :3
+Explanation : We will start from first tree.
+The first tree produces the fruit of kind '1' and we will put that in the first basket.
+The second tree produces the fruit of kind '2' and we will put that in the second basket.
+The third tree produces the fruit of kind '1' and we have first basket that is already holding fruit of kind '1'. So we will put it in first basket.
+Hence we were able to collect total of 3 fruits.
+
+
+class Solution {
+    public int totalFruits(int[] fruits) {
+        //your code goes here
+        int maxlen = 0;
+        int last = -1;
+        int seclast = -1;
+        int streak = 0;
+        int curr = 0;
+
+        for(int fruit : fruits){
+          if(fruit == last || fruit == seclast){
+            curr++;
+          }
+          else{
+            curr = streak+1;
+          }
+
+          if(fruit == last){
+            streak++;
+          }
+          else{
+            streak = 1;
+            seclast = last;
+            last = fruit;
+          }
+          maxlen = Math.max(maxlen , curr);
+        } 
+        return maxlen;
+    }
+}
