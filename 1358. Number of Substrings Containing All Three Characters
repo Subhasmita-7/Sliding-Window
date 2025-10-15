@@ -1,0 +1,23 @@
+Input: s = "abcabc"
+Output: 10
+Explanation: The substrings containing at least one occurrence of the characters a, b and c are "abc", "abca", "abcab", "abcabc", "bca", "bcab", "bcabc", "cab", "cabc" and "abc" (again). 
+
+
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int count = 0;
+        int left = 0;
+        int[] freq = new int[3];
+
+        for(int right = 0 ; right < s.length() ; right++){
+            freq[s.charAt(right) - 'a']++;
+
+            while(freq[0]>1 && freq[1]>1 && freq[2]>0){
+                count = count + (s.length() - right);
+                freq[s.charAt(left) - 'a']--;
+                left++;
+            }    
+        }
+        return count;
+    }
+}
