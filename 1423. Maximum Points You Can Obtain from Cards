@@ -1,0 +1,27 @@
+Input: cardPoints = [1,2,3,4,5,6,1], k = 3
+Output: 12
+ 1 + 6 + 5 = 12.
+
+
+class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        int sum = 0;
+        int len = cardPoints.length;
+        
+        for(int i = 0 ; i < k ; i++){
+            sum += cardPoints[i];
+        }
+
+        int maxi = 0;
+        if(sum > maxi){
+            maxi = sum;
+        }
+
+        for(int i = 0 ; i<k ; i++){
+            sum -= cardPoints[k-1-i];
+            sum += cardPoints[len-1-i];
+            maxi = Math.max(sum , maxi);
+        }
+        return maxi;
+    }
+}
